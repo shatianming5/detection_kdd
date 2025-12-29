@@ -16,6 +16,12 @@ __pycache__/
 *.tmp
 *.swp
 
+# Secrets / env
+.env
+.env.*
+!.env.example
+wandb/
+
 # Large artifacts / datasets (kept locally, not pushed)
 datasets/
 repro_10k/
@@ -49,4 +55,3 @@ work_dirs/
 *.tar.gz
 *.tgz
 *.zip
-

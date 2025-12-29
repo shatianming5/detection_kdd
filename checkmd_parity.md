@@ -17,7 +17,7 @@
 对齐原则：**任何结论必须能仅靠 `ckpt + tsv` 复验**（不依赖 `/dev/shm` 临时目录）。
 
 - ckpt：`baselines/checkpoints/*.pth`（同名 `.sha256`）
-- tsv：仓库根目录 `*.tsv`（优先由 `scripts/eval_multiseed.py` 生成，含 ckpt sha256）
+- tsv：`results/*.tsv`（优先由 `scripts/eval_multiseed.py` 生成，含 ckpt sha256）
 - 总索引：`results_manifest.tsv`
 - 冻结交付（step1, 5-seed）：`deliverables/step1_5seed_geofeat_mix/manifest.tsv`
 
@@ -31,7 +31,7 @@
 - 本仓库现状：
   - ✅ 盒回归：L1 + GIoU（`baselines/DiffusionDet/diffusiondet/loss.py`）
   - ✅ “IoU-aware/VFL 风格加权”已实现（默认关闭）：`MODEL.DiffusionDet.BOX_LOSS_IOU_WEIGHT_POWER`（`baselines/DiffusionDet/diffusiondet/config.py` / `baselines/DiffusionDet/diffusiondet/loss.py`）
-- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `checkmd_mvp_seed0_iter200_step1_results.tsv`
+- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `results/checkmd_mvp_seed0_iter200_step1_results.tsv`
 
 ### 1.2 5.2 Hybrid Quality Focal Loss（QFL）（`check.md:212`）
 
@@ -39,7 +39,7 @@
 - 本仓库现状：
   - ✅ 分类：sigmoid focal（默认；`CLS_LOSS_TYPE=focal`）
   - ✅ QFL 已实现（默认关闭）：`MODEL.DiffusionDet.CLS_LOSS_TYPE=qfl`、`MODEL.DiffusionDet.QFL_BETA`（`baselines/DiffusionDet/diffusiondet/config.py` / `baselines/DiffusionDet/diffusiondet/loss.py`）
-- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `checkmd_mvp_seed0_iter200_step1_results.tsv`
+- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `results/checkmd_mvp_seed0_iter200_step1_results.tsv`
 
 ### 1.3 5.3 Graph Consistency Loss（`check.md:224`）
 
@@ -48,7 +48,7 @@
   - ✅ 可捕获最后一层 proposal self-attn（`baselines/DiffusionDet/diffusiondet/head.py:901`）
   - ✅ `loss_graph` 实现（`baselines/DiffusionDet/diffusiondet/loss.py:256`）
   - ✅ 配置开关：`MODEL.DiffusionDet.GRAPH_TOPO_LOSS_WEIGHT`（`baselines/DiffusionDet/diffusiondet/config.py:196`）
-- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `GRAPH_TOPO_LOSS_WEIGHT=1.0`）
+- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `results/checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `GRAPH_TOPO_LOSS_WEIGHT=1.0`）
 
 ---
 
@@ -72,7 +72,7 @@
 
 #### 6.2.1 D3PM Scheduler（`check.md:257`）
 - ✅ 已实现并用于主线：`LABEL_D3PM`（`baselines/DiffusionDet/diffusiondet/detector.py:290`）
-- ✅ 有证据：`d3pm_qhead_step1_results.tsv` / `d3pm_qhead_warmstart_step1_results.tsv` 等（见 `plan2.md`、`results_manifest.tsv`）
+- ✅ 有证据：`results/d3pm_qhead_step1_results.tsv` / `results/d3pm_qhead_warmstart_step1_results.tsv` 等（见 `plan2.md`、`results_manifest.tsv`）
 
 #### 6.2.2 Graph Transformer + Geometric Bias（`check.md:258`）
 - check.md 要求：带“几何偏置网络 g_phi”的 attention（可 FlashAttention-2 加速）。
@@ -86,11 +86,11 @@
     - Benchmark：`scripts/benchmark_attention.py`
     - 注意1：当 `GRAPH_TOPO_LOSS_WEIGHT>0` 需要返回 attention weights 时，会自动回退到 `nn.MultiheadAttention`
     - 注意2：PyTorch 的 FlashAttention kernel 不支持通用的 additive `attn_mask`；开启 `GEO_BIAS`（会生成 float bias mask）时通常会回退到 math kernel（仍可正确但不等价于“FlashAttention 加速”）
-- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `GEO_BIAS=True, GEO_BIAS_TYPE=mlp`）
+- 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `results/checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `GEO_BIAS=True, GEO_BIAS_TYPE=mlp`）
 
 #### 6.2.3 Anisotropic Noise（`check.md:259`）
 - ✅ 代码已实现（可开关）：`ANISO_NOISE*`（`baselines/DiffusionDet/diffusiondet/detector.py:169` + `q_sample/ddim_sample`）
-- ✅ 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `ANISO_NOISE=True`）
+- ✅ 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth` + `results/checkmd_mvp_seed0_iter200_step1_results.tsv`（配置 `ANISO_NOISE=True`）
 
 #### 6.2 验证（VOC 小数据集收敛检查）
 - check.md 建议：在小规模数据集（如 VOC）上验证混合损失是否可收敛。
@@ -101,11 +101,11 @@
 
 ### 2.3 6.3 Guidance & Distillation（`check.md:264`）
 
-- ✅ Quality Head：已实现+有证据（`guidance_sweep_results_qhead_seed42*.tsv`，见 `plan2.md`）
+- ✅ Quality Head：已实现+有证据（`results/guidance_sweep_results_qhead_seed42*.tsv`，见 `plan2.md`）
 - ✅ Energy Sampling（Langevin guidance）：已实现（`baselines/DiffusionDet/diffusiondet/detector.py:511`）且有 sweep 表
 - 🟡 Consistency Distillation（teacher->student 同噪声/同 t 的 distill）：
   - ✅ 入口与 loss 已实现（`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_consistency_distill.yaml`；`baselines/DiffusionDet/diffusiondet/detector.py:782`）
-  - ✅ 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_consistency_smoke_seed0_iter50.pth` + `checkmd_consistency_smoke_seed0_iter50_step1_results.tsv`（仅 smoke 验收链路）
+  - ✅ 证据（ckpt+tsv，可复验）：`baselines/checkpoints/checkmd_consistency_smoke_seed0_iter50.pth` + `results/checkmd_consistency_smoke_seed0_iter50_step1_results.tsv`（仅 smoke 验收链路）
 - ✅ Sampler distill（teacher step20→student step1 真加速）：已实现+已做成 5-seed 冻结交付（见 `deliverables/...`）
 - 🟡 check.md 里“逐步把采样步数 1000→4→2”的 *学生多步采样蒸馏*：
   - ✅ 已补齐“多步学生”的工程能力：`SAMPLER_DISTILL_STUDENT_SAMPLE_STEP>1` 会在训练时实际运行学生 sampler（`baselines/DiffusionDet/diffusiondet/detector.py`）
@@ -138,9 +138,9 @@
 
 ### 3.1 7.1 指标（`check.md:294`）
 - ✅ 标准检测指标（AP/AP50/AP75/...）：已覆盖（COCOeval）
-- ✅ 稳定性（多 eval_seed 复验 mean/std）：已作为主口径（`scripts/eval_multiseed.py` + `final_step1_5seed_geofeat_mix.tsv`）
+- ✅ 稳定性（多 eval_seed 复验 mean/std）：已作为主口径（`scripts/eval_multiseed.py` + `results/final_step1_5seed_geofeat_mix.tsv`）
 - ✅ Inference FPS（实现“可落盘的计时口径”）：`scripts/eval_multiseed.py` 现在会在 TSV 里写 `inference_s_per_img` / `inference_fps`（由 detectron2 eval 日志里的 `s / iter per device` + `SOLVER.IMS_PER_BATCH` 推导；硬件相关）
-  - 证据（TSV 示例）：`ablation_graph_topo_full_seed0_stable_step1_results.tsv`
+  - 证据（TSV 示例）：`results/ablation_graph_topo_full_seed0_stable_step1_results.tsv`
 
 ### 3.2 7.3 消融（`check.md:330`）
 
@@ -148,10 +148,10 @@
 - ✅ Full Graph（默认 self-attn 全连接）：存在  
 - ✅ Sparse kNN（k-NN 动态图）：`GEO_BIAS_TOPK>0` 会把 attention mask 稀疏化；已补齐示例 config 与 TSV
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_graph_topo_sparse_knn_topk50.yaml`
-  - TSV（eval-only 示例）：`ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1_results.tsv`
+  - TSV（eval-only 示例）：`results/ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1_results.tsv`
 - ✅ 独立节点（无交互）：已补齐开关 `DISABLE_SELF_ATTN`（`baselines/DiffusionDet/diffusiondet/config.py` / `baselines/DiffusionDet/diffusiondet/head.py`）
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_graph_topo_none.yaml`
-  - TSV（eval-only 示例）：`ablation_graph_topo_none_seed0_stable_step1_results.tsv`
+  - TSV（eval-only 示例）：`results/ablation_graph_topo_none_seed0_stable_step1_results.tsv`
 
 2) Hybrid vs Gaussian（D3PM vs continuous label）  
 - ✅ 部分覆盖：已有 `LABEL_D3PM` vs baseline 对照（Repro-10k）  
@@ -162,7 +162,7 @@
   - Objects365 模板（需 `EXTRA_COCO_DATASETS` 注册）：`baselines/DiffusionDet/configs/diffdet.objects365.res50_d3pm_mask_dist_qhead.yaml`
 
 3) Energy guidance 强度 sweep  
-- ✅ 已覆盖（见 `guidance_sweep_results_qhead_seed42*.tsv`）
+- ✅ 已覆盖（见 `results/guidance_sweep_results_qhead_seed42*.tsv`）
 
 4) Anisotropic noise  
 - ✅ 代码在  

@@ -67,7 +67,7 @@ def main() -> int:
     ap.add_argument("--run-tag", required=True, help="Used to name TSV/manifest files and eval exp_name.")
     ap.add_argument("--baseline-prefix", required=True, help="Used to name manifest baseline_name (prefix + _stepX).")
     ap.add_argument("--out-base", default="/data/tiasha_archives_runs/mmdet3_evals")
-    ap.add_argument("--summary-out", default="rerun_mmdet3_lvis_crowdhuman_summary.tsv")
+    ap.add_argument("--summary-out", default="results/rerun_mmdet3_lvis_crowdhuman_summary.tsv")
     ap.add_argument("--steps", nargs="+", type=int, default=[10, 1])
     ap.add_argument("--eval-seeds", nargs="+", type=int, default=[0, 1, 2, 3, 4])
     ap.add_argument("--conda-env", default="mmdet3")
@@ -98,8 +98,8 @@ def main() -> int:
     try:
         for step in args.steps:
             exp_name = f"{args.run_tag}_step{int(step)}"
-            tsv_out = f"{exp_name}_results.tsv"
-            manifest_out = f"{exp_name}_manifest.tsv"
+            tsv_out = f"results/{exp_name}_results.tsv"
+            manifest_out = f"results/{exp_name}_manifest.tsv"
             baseline_name = f"{args.baseline_prefix}_step{int(step)}"
 
             _run(

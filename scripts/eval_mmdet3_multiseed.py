@@ -13,6 +13,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+from wandb_utils import init_wandb_run, load_dotenv, log_artifact_files, should_enable_wandb, tsv_to_wandb_table
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -221,6 +223,17 @@ def main() -> int:
         help="Which evaluator metric to parse from MMEngine json.",
     )
     ap.add_argument("--conda-env", default="mmdet3", help="Conda env name that has mmdet+mmengine.")
+    ap.add_argument(
+        "--wandb",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Log eval results to Weights & Biases. Default: auto-enable when WANDB_PROJECT/WANDB_API_KEY is set.",
+    )
+    ap.add_argument("--wandb-project", default="", help="Override WANDB_PROJECT.")
+    ap.add_argument("--wandb-entity", default="", help="Override WANDB_ENTITY.")
+    ap.add_argument("--wandb-name", default="", help="Override W&B run name.")
+    ap.add_argument("--wandb-group", default="", help="Override W&B group (WANDB_RUN_GROUP).")
+    ap.add_argument("--wandb-tags", nargs="*", default=[], help="Extra W&B tags.")
     args = ap.parse_args()
 
     ckpt_path = Path(args.checkpoint).resolve()
@@ -327,6 +340,59 @@ def main() -> int:
     print(f"wrote_tsv={out_tsv}")
     print(f"ckpt_sha256={ckpt_sha256}")
     print(f"mean_AP={mean_ap:.5f} std_AP_pop={std_ap:.5f}")
+
+    load_dotenv(REPO_ROOT / ".env")
+    if should_enable_wandb(args.wandb):
+        run = init_wandb_run(
+            name=(args.wandb_name or exp_name),
+            project=(args.wandb_project or None),
+            entity=(args.wandb_entity or None),
+            group=(args.wandb_group or None),
+            tags=[
+                "mmdet3",
+                "eval",
+                str(args.metric_type),
+                f"sample_step={int(args.sample_step)}",
+                *list(args.wandb_tags or []),
+            ],
+            config={
+                "stack": "mmdet3",
+                "exp_name": exp_name,
+                "metric_type": str(args.metric_type),
+                "config_file": str(cfg_path),
+                "checkpoint": str(ckpt_path),
+                "ckpt_sha256": ckpt_sha256,
+                "sample_step": int(args.sample_step),
+                "eval_seeds": list(map(int, args.eval_seeds)),
+                "ddim_eta": float(args.ddim_eta),
+                "score_thr": float(args.score_thr),
+                "max_per_img": int(args.max_per_img),
+                "tsv_out": str(out_tsv),
+            },
+        )
+        try:
+            payload: dict[str, float | object] = {
+                "mean_AP": float(mean_ap),
+                "std_AP_pop": float(std_ap),
+                "eval_table": tsv_to_wandb_table(out_tsv.resolve()),
+            }
+
+            fps_vals = [r.inference_fps for r in rows if r.inference_fps is not None]
+            if fps_vals:
+                payload["mean_inference_fps"] = float(statistics.mean(fps_vals))
+
+            mr_vals = [r.mr for r in rows if r.mr is not None]
+            if mr_vals:
+                payload["mean_MR"] = float(statistics.mean(mr_vals))
+
+            ji_vals = [r.ji for r in rows if r.ji is not None]
+            if ji_vals:
+                payload["mean_JI"] = float(statistics.mean(ji_vals))
+
+            run.log(payload)
+            log_artifact_files(run, name=f"{exp_name}_tsv", files=[out_tsv.resolve()], artifact_type="results")
+        finally:
+            run.finish()
 
     return 0
 

@@ -15,6 +15,8 @@ from typing import Iterable
 
 import yaml
 
+from wandb_utils import init_wandb_run, load_dotenv, log_artifact_files, should_enable_wandb, tsv_to_wandb_table
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DIFFDET_DIR = REPO_ROOT / "baselines" / "DiffusionDet"
 
@@ -197,6 +199,17 @@ def main() -> int:
     ap.add_argument("--num-gpus", type=int, default=1)
     ap.add_argument("--keep-inference-json", action="store_true", help="Keep inference/*.json outputs (can be large).")
     ap.add_argument(
+        "--wandb",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Log eval results to Weights & Biases. Default: auto-enable when WANDB_PROJECT/WANDB_API_KEY is set.",
+    )
+    ap.add_argument("--wandb-project", default="", help="Override WANDB_PROJECT.")
+    ap.add_argument("--wandb-entity", default="", help="Override WANDB_ENTITY.")
+    ap.add_argument("--wandb-name", default="", help="Override W&B run name.")
+    ap.add_argument("--wandb-group", default="", help="Override W&B group (WANDB_RUN_GROUP).")
+    ap.add_argument("--wandb-tags", nargs="*", default=[], help="Extra W&B tags.")
+    ap.add_argument(
         "--opt",
         action="append",
         nargs=2,
@@ -287,12 +300,54 @@ def main() -> int:
 
         print(f"eval_seed={eval_seed} AP={metrics['AP']:.4f} out_dir={out_dir}")
 
-    _write_tsv(Path(args.tsv_out), rows)
+    tsv_out_path = Path(args.tsv_out)
+    _write_tsv(tsv_out_path, rows)
 
     aps = [r.ap for r in rows]
+    mean_ap = statistics.mean(aps)
+    std_ap = statistics.pstdev(aps) if len(aps) > 1 else 0.0
     print(f"wrote_tsv={args.tsv_out}")
     print(f"ckpt_sha256={ckpt_sha256}")
-    print(f"mean_AP={statistics.mean(aps):.5f} std_AP_pop={statistics.pstdev(aps):.5f}")
+    print(f"mean_AP={mean_ap:.5f} std_AP_pop={std_ap:.5f}")
+
+    load_dotenv(REPO_ROOT / ".env")
+    if should_enable_wandb(args.wandb):
+        run = init_wandb_run(
+            name=(args.wandb_name or exp_name),
+            project=(args.wandb_project or None),
+            entity=(args.wandb_entity or None),
+            group=(args.wandb_group or None),
+            tags=["detectron2", "eval", f"sample_step={int(args.sample_step)}", *list(args.wandb_tags or [])],
+            config={
+                "stack": "detectron2",
+                "exp_name": exp_name,
+                "config_file": str(config_path),
+                "weights": str(weights_path),
+                "ckpt_sha256": ckpt_sha256,
+                "sample_step": int(args.sample_step),
+                "eval_seeds": list(map(int, args.eval_seeds)),
+                "num_gpus": int(args.num_gpus),
+                "tsv_out": str(tsv_out_path),
+            },
+        )
+        try:
+            payload: dict[str, float | object] = {
+                "mean_AP": float(mean_ap),
+                "std_AP_pop": float(std_ap),
+                "eval_table": tsv_to_wandb_table(tsv_out_path.resolve()),
+            }
+            fps_vals = [r.inference_fps for r in rows if r.inference_fps is not None]
+            if fps_vals:
+                payload["mean_inference_fps"] = float(statistics.mean(fps_vals))
+            run.log(payload)
+            log_artifact_files(
+                run,
+                name=f"{exp_name}_tsv",
+                files=[tsv_out_path.resolve()],
+                artifact_type="results",
+            )
+        finally:
+            run.finish()
     return 0
 
 

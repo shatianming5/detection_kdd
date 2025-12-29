@@ -16,7 +16,7 @@
 
 对外冻结交付已生成：
 - `deliverables/step1_5seed_geofeat_mix/manifest.tsv`
-- `final_step1_5seed_geofeat_mix.tsv`
+- `results/final_step1_5seed_geofeat_mix.tsv`
 
 ---
 
@@ -66,73 +66,73 @@
     - `sampler_distill_20to1_seed3_iter2500_stable_geofeat_ft_iter1000_lrmult25.pth`  
     - `sampler_distill_20to1_seed4_iter2500_stable_geofeat_ft_iter1000_lrmult150.pth`
 
-### 2.2 结果 TSV（仓库根目录 `*.tsv`）
+### 2.2 结果 TSV（`results/*.tsv`）
 
 这些 TSV 是当前最“硬”的可复验证据（每行都是一次 eval-only 的结果；可用脚本重新汇总）。
 
 #### Baseline / D3PM / warmstart（step1 & step5）
 
-- `baseline_step1_results.tsv`：10k baseline，train_seed=0/1/2 × eval_seed=0..4（step1）  
+- `results/baseline_step1_results.tsv`：10k baseline，train_seed=0/1/2 × eval_seed=0..4（step1）  
   - flatten mean/std(15 runs) = **46.4293 / 0.7817**
-- `baseline_step5_results.tsv`：同上（step5）  
+- `results/baseline_step5_results.tsv`：同上（step5）  
   - flatten mean/std(15 runs) = **48.2897 / 0.6804**
-- `d3pm_qhead_step1_results.tsv`：D3PM+QHead（非 warmstart）  
+- `results/d3pm_qhead_step1_results.tsv`：D3PM+QHead（非 warmstart）  
   - flatten mean/std = **44.8068 / 2.0555**（方差大且均值低）
-- `d3pm_qhead_step5_results.tsv`：同上（step5）  
+- `results/d3pm_qhead_step5_results.tsv`：同上（step5）  
   - flatten mean/std = **46.8046 / 1.8905**
-- `d3pm_qhead_warmstart_step1_results.tsv`：D3PM+QHead warmstart baseline（seed0/1/2）  
+- `results/d3pm_qhead_warmstart_step1_results.tsv`：D3PM+QHead warmstart baseline（seed0/1/2）  
   - flatten mean/std = **46.9069 / 0.6829**
-- `d3pm_qhead_warmstart_step5_results.tsv`：同上（step5）  
+- `results/d3pm_qhead_warmstart_step5_results.tsv`：同上（step5）  
   - flatten mean/std = **48.5016 / 0.6158**
-- `d3pm_qhead_warmstart_seed3_step1_results.tsv`：warmstart baseline（train_seed=3，eval_seed=0..4）  
+- `results/d3pm_qhead_warmstart_seed3_step1_results.tsv`：warmstart baseline（train_seed=3，eval_seed=0..4）  
   - mean/std = **47.5083 / 0.4325**
-- `d3pm_qhead_warmstart_seed4_step1_results.tsv`：warmstart baseline（train_seed=4，eval_seed=0..4）  
+- `results/d3pm_qhead_warmstart_seed4_step1_results.tsv`：warmstart baseline（train_seed=4，eval_seed=0..4）  
   - mean/std = **47.3521 / 0.2592**
 
 #### warmstart seed0 的 step 数/速度折中（单 train_seed=0，eval_seed=0..4）
 
-- `warmstart_seed0_step1_results.tsv`：mean/std = **47.4822 / 0.3432**
-- `warmstart_seed0_step5_results.tsv`：mean/std = **49.0658 / 0.4201**
-- `warmstart_seed0_step10_results.tsv`：mean/std = **49.2828 / 0.3333**
-- `warmstart_seed0_step20_results.tsv`：mean/std = **49.6059 / 0.4056**
-- `warmstart_seed0_step50_results.tsv`：mean/std = **49.2875 / 0.3312**
+- `results/warmstart_seed0_step1_results.tsv`：mean/std = **47.4822 / 0.3432**
+- `results/warmstart_seed0_step5_results.tsv`：mean/std = **49.0658 / 0.4201**
+- `results/warmstart_seed0_step10_results.tsv`：mean/std = **49.2828 / 0.3333**
+- `results/warmstart_seed0_step20_results.tsv`：mean/std = **49.6059 / 0.4056**
+- `results/warmstart_seed0_step50_results.tsv`：mean/std = **49.2875 / 0.3312**
 
 #### Phase2：GEO_FEAT warmstart sweep（train_seed=1）
 
-- `phase2_geofeat_sweep_seed1_iter1000_step1_results.tsv`：best = `lrmult150` mean/std **47.2633 / 0.3848**
-- `phase2_geofeat_sweep_seed1_iter1500_step1_results.tsv`：best = `lrmult100` mean/std **47.2753 / 0.7134**
-- `phase2_geofeat_sweep_seed1_iter2000_step1_results.tsv`：整体偏弱（46.64~46.88）
+- `results/phase2_geofeat_sweep_seed1_iter1000_step1_results.tsv`：best = `lrmult150` mean/std **47.2633 / 0.3848**
+- `results/phase2_geofeat_sweep_seed1_iter1500_step1_results.tsv`：best = `lrmult100` mean/std **47.2753 / 0.7134**
+- `results/phase2_geofeat_sweep_seed1_iter2000_step1_results.tsv`：整体偏弱（46.64~46.88）
 
 #### Phase3：Quality guidance / sweep（历史记录）
 
-- `guidance_sweep_results_qhead_seed42.tsv`：step1 下的 guidance sweep（含多个 eval_seed）
-- `guidance_sweep_results_qhead_seed42_step5.tsv`：step5 下的 guidance sweep（含多个 eval_seed）
+- `results/guidance_sweep_results_qhead_seed42.tsv`：step1 下的 guidance sweep（含多个 eval_seed）
+- `results/guidance_sweep_results_qhead_seed42_step5.tsv`：step5 下的 guidance sweep（含多个 eval_seed）
 
 #### Phase3：sampler distill（step20→step1）
 
 stable student（eval_seed=0..4）：
 
-- `sampler_distill_20to1_seed0_iter2500_stable_step1_results.tsv`：mean/std **49.4829 / 0.4277**
-- `sampler_distill_20to1_seed1_iter2500_stable_step1_results.tsv`：mean/std **46.7410 / 0.6178**
-- `sampler_distill_20to1_seed2_iter2500_stable_step1_results.tsv`：mean/std **48.0701 / 0.9205**
-- `sampler_distill_20to1_seed3_iter2500_stable_step1_results.tsv`：mean/std **48.5907 / 0.3326**
-- `sampler_distill_20to1_seed4_iter2500_stable_step1_results.tsv`：mean/std **47.6969 / 0.5274**
+- `results/sampler_distill_20to1_seed0_iter2500_stable_step1_results.tsv`：mean/std **49.4829 / 0.4277**
+- `results/sampler_distill_20to1_seed1_iter2500_stable_step1_results.tsv`：mean/std **46.7410 / 0.6178**
+- `results/sampler_distill_20to1_seed2_iter2500_stable_step1_results.tsv`：mean/std **48.0701 / 0.9205**
+- `results/sampler_distill_20to1_seed3_iter2500_stable_step1_results.tsv`：mean/std **48.5907 / 0.3326**
+- `results/sampler_distill_20to1_seed4_iter2500_stable_step1_results.tsv`：mean/std **47.6969 / 0.5274**
 - 汇总（seed0/1/2 × eval0..4）：mean/std **48.0980 / 1.3130**
 - 汇总（seed0..4 × eval0..4）：mean/std **48.1163 / 1.0920**
 
 stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER=0.0`）：
 
-- `sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **49.5638 / 0.2476**（✅ 推荐；已固化 ckpt）
-- `sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult50_step1_results.tsv`：mean/std **49.4513 / 0.1524**（均值略降但方差更低）
-- `sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult100_step1_results.tsv`：mean/std **49.3992 / 0.2449**（均值略降）
-- `sampler_distill_20to1_seed1_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.4178 / 0.3882**（已固化 ckpt）
-- `sampler_distill_20to1_seed2_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.7277 / 0.7317**（已固化 ckpt）
-- `sampler_distill_20to1_seed3_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **48.8636 / 0.3135**（✅ 推荐；均值更高）
-- `sampler_distill_20to1_seed3_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.6745 / 0.1742**（备选；方差更低）
-- `sampler_distill_20to1_seed4_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.1256 / 0.2314**（✅ 推荐）
-- `sampler_distill_20to1_seed4_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **47.7380 / 0.5768**（不推荐）
-- `sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **49.0169 / 0.4120**（历史记录；掉点，不推荐）
-- seed1 `GEO_FEAT_LR_MULT` sweep 汇总：`sampler_distill_20to1_seed1_stable_geofeat_lrmult_sweep_iter1000_step1_summary.tsv`
+- `results/sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **49.5638 / 0.2476**（✅ 推荐；已固化 ckpt）
+- `results/sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult50_step1_results.tsv`：mean/std **49.4513 / 0.1524**（均值略降但方差更低）
+- `results/sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult100_step1_results.tsv`：mean/std **49.3992 / 0.2449**（均值略降）
+- `results/sampler_distill_20to1_seed1_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.4178 / 0.3882**（已固化 ckpt）
+- `results/sampler_distill_20to1_seed2_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.7277 / 0.7317**（已固化 ckpt）
+- `results/sampler_distill_20to1_seed3_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **48.8636 / 0.3135**（✅ 推荐；均值更高）
+- `results/sampler_distill_20to1_seed3_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.6745 / 0.1742**（备选；方差更低）
+- `results/sampler_distill_20to1_seed4_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **48.1256 / 0.2314**（✅ 推荐）
+- `results/sampler_distill_20to1_seed4_iter2500_stable_geofeat_ft_iter1000_lrmult25_step1_results.tsv`：mean/std **47.7380 / 0.5768**（不推荐）
+- `results/sampler_distill_20to1_seed0_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **49.0169 / 0.4120**（历史记录；掉点，不推荐）
+- seed1 `GEO_FEAT_LR_MULT` sweep 汇总：`results/sampler_distill_20to1_seed1_stable_geofeat_lrmult_sweep_iter1000_step1_summary.tsv`
   - `lrmult100`：mean/std **47.4932 / 0.5409**
   - `lrmult150`：mean/std **47.4178 / 0.3882**
   - `lrmult200`：mean/std **46.7669 / 0.4305**
@@ -140,20 +140,20 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 失败/证伪的 distill 尝试：
 
-- `sampler_distill_20to1_seed1_teacher_geofeat150_iter2500_step1_results.tsv`：mean/std **46.4670 / 0.9310**（teacher=geo_feat，掉点）
-- `sampler_distill_20to1_seed1_teacher_seed0warmstart_iter2500_step1_results.tsv`：mean/std **46.2054 / 0.8526**（teacher 换 seed0 warmstart 更差）
+- `results/sampler_distill_20to1_seed1_teacher_geofeat150_iter2500_step1_results.tsv`：mean/std **46.4670 / 0.9310**（teacher=geo_feat，掉点）
+- `results/sampler_distill_20to1_seed1_teacher_seed0warmstart_iter2500_step1_results.tsv`：mean/std **46.2054 / 0.8526**（teacher 换 seed0 warmstart 更差）
 - distill loss sweep（`SAMPLER_DISTILL_CLS_WEIGHT`）：
-  - `sampler_distill_20to1_seed1_iter2500_cls0p1_step1_results.tsv`：mean/std **46.0795 / 0.9304**
-  - `sampler_distill_20to1_seed1_iter2500_cls0p1_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.2258 / 0.7211**
-  - `sampler_distill_20to1_seed1_iter2500_cls0p2_step1_results.tsv`：mean/std **46.0946 / 0.9961**
-  - `sampler_distill_20to1_seed1_iter2500_cls0p2_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.4020 / 0.5271**
+  - `results/sampler_distill_20to1_seed1_iter2500_cls0p1_step1_results.tsv`：mean/std **46.0795 / 0.9304**
+  - `results/sampler_distill_20to1_seed1_iter2500_cls0p1_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.2258 / 0.7211**
+  - `results/sampler_distill_20to1_seed1_iter2500_cls0p2_step1_results.tsv`：mean/std **46.0946 / 0.9961**
+  - `results/sampler_distill_20to1_seed1_iter2500_cls0p2_geofeat_ft_iter1000_lrmult150_step1_results.tsv`：mean/std **47.4020 / 0.5271**
 - distill knob（`SAMPLER_DISTILL_TOPK`）：
-  - `sampler_distill_20to1_seed1_iter2500_topk50_step1_results.tsv`：mean/std **46.1499 / 0.6418**（比 stable seed1 更差；停止该方向）
-  - `sampler_distill_20to1_seed1_iter2500_topk150_step1_results.tsv`：mean/std **45.9879 / 1.0463**（更差；停止该方向）
-  - `sampler_distill_20to1_seed1_iter2500_topk200_step1_results.tsv`：mean/std **46.0025 / 0.9646**（更差；停止该方向）
+  - `results/sampler_distill_20to1_seed1_iter2500_topk50_step1_results.tsv`：mean/std **46.1499 / 0.6418**（比 stable seed1 更差；停止该方向）
+  - `results/sampler_distill_20to1_seed1_iter2500_topk150_step1_results.tsv`：mean/std **45.9879 / 1.0463**（更差；停止该方向）
+  - `results/sampler_distill_20to1_seed1_iter2500_topk200_step1_results.tsv`：mean/std **46.0025 / 0.9646**（更差；停止该方向）
 - distill knob（`SAMPLER_DISTILL_BOX_WEIGHT`）：
-  - `sampler_distill_20to1_seed1_iter2500_boxw0p5_step1_results.tsv`：mean/std **45.8648 / 1.0076**（更差；停止该方向）
-  - `sampler_distill_20to1_seed1_iter2500_boxw2p0_step1_results.tsv`：mean/std **46.3139 / 0.7068**（仍低于 stable seed1=46.7410；停止该方向）
+  - `results/sampler_distill_20to1_seed1_iter2500_boxw0p5_step1_results.tsv`：mean/std **45.8648 / 1.0076**（更差；停止该方向）
+  - `results/sampler_distill_20to1_seed1_iter2500_boxw2p0_step1_results.tsv`：mean/std **46.3139 / 0.7068**（仍低于 stable seed1=46.7410；停止该方向）
 
 ---
 
@@ -201,7 +201,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 ### 3.5 Phase 3：Quality head / guidance
 
-证据来源：`PROGRESS.md:313` 起 + `guidance_sweep_results_qhead_seed42*.tsv`。
+证据来源：`PROGRESS.md:313` 起 + `results/guidance_sweep_results_qhead_seed42*.tsv`。
 
 - 质量头工程接入已完成，并定位修复过“掉点/AP=0/无预测”等问题（详见 PROGRESS）  
 - 更稳定的落地收益：`QUALITY_SCORE_REWEIGHT=True`（见 `PROGRESS.md:470`）在多 seed 下稳定增益  
@@ -228,7 +228,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 冻结交付（对外口径）：
 - 清单与 sha256：`deliverables/step1_5seed_geofeat_mix/manifest.tsv`
-- 合并 25-run 表：`final_step1_5seed_geofeat_mix.tsv`
+- 合并 25-run 表：`results/final_step1_5seed_geofeat_mix.tsv`
 
 ---
 
@@ -248,7 +248,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 - 目标：以后任何新实验必须同时产出：  
   1) `baselines/checkpoints/<name>.pth`（只保留 best/最终）  
-  2) 根目录 `*.tsv`（包含 eval_seed、AP、out_dir、以及 ckpt 的名字/哈希）  
+  2) `results/*.tsv`（包含 eval_seed、AP、out_dir、以及 ckpt 的名字/哈希）  
 - 通过标准：任何结论都可以仅靠 `ckpt + tsv` 被复验，不依赖 `/dev/shm` 临时目录。
 
 已落地工具（现在开始所有新实验都用它们来落盘）：
@@ -258,7 +258,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 已完成冻结交付（对外口径）：
 - `deliverables/step1_5seed_geofeat_mix/manifest.tsv`
-- `final_step1_5seed_geofeat_mix.tsv`
+- `results/final_step1_5seed_geofeat_mix.tsv`
 
 ### 5.2 distill 的下一轮优化（只动一个旋钮）
 
@@ -302,8 +302,8 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 已执行（stable distill 20→1；新增 train_seed=3/4；eval_seed=0..4）：
 
-- train_seed=3：`sampler_distill_20to1_seed3_iter2500_stable_step1_results.tsv` mean/std **48.5907 / 0.3326**  
-- train_seed=4：`sampler_distill_20to1_seed4_iter2500_stable_step1_results.tsv` mean/std **47.6969 / 0.5274**
+- train_seed=3：`results/sampler_distill_20to1_seed3_iter2500_stable_step1_results.tsv` mean/std **48.5907 / 0.3326**  
+- train_seed=4：`results/sampler_distill_20to1_seed4_iter2500_stable_step1_results.tsv` mean/std **47.6969 / 0.5274**
 
 汇总（train_seed=0..4 × eval_seed=0..4）：flatten mean/std **48.1163 / 1.0920**（稳定性更可信，可用于对外口径）。
 
@@ -329,11 +329,11 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 - check.md Phase2/5.* “混合损失 + 图模块 + 各向异性噪声”组合 smoke（train_seed=0，200 iter）：
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_checkmd_mvp.yaml`
   - ckpt：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth`
-  - TSV：`checkmd_mvp_seed0_iter200_step1_results.tsv`（eval_seed=0..4 mean/std **47.5333 / 0.3146**）
+  - TSV：`results/checkmd_mvp_seed0_iter200_step1_results.tsv`（eval_seed=0..4 mean/std **47.5333 / 0.3146**）
 - check.md Phase3 “Consistency Distillation” smoke（train_seed=0，50 iter；仅验收 loss 链路 + 落盘）：
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_consistency_distill.yaml`
   - ckpt：`baselines/checkpoints/checkmd_consistency_smoke_seed0_iter50.pth`
-  - TSV：`checkmd_consistency_smoke_seed0_iter50_step1_results.tsv`（eval_seed=0..4 mean/std **47.4060 / 0.5396**）
+  - TSV：`results/checkmd_consistency_smoke_seed0_iter50_step1_results.tsv`（eval_seed=0..4 mean/std **47.4060 / 0.5396**）
 
 ### 5.6 对齐 `check.md` 的指标/消融口径（FPS + 图拓扑）
 
@@ -342,9 +342,9 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
   - 无交互（independent nodes）：`MODEL.DiffusionDet.DISABLE_SELF_ATTN=True`（示例 config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_graph_topo_none.yaml`）
   - 稀疏 kNN：`MODEL.DiffusionDet.GEO_BIAS_TOPK>0`（示例 config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_graph_topo_sparse_knn_topk50.yaml`）
 - TSV 示例（eval-only，train_seed=0 stable student；eval_seed=0..4）：  
-  - Full：`ablation_graph_topo_full_seed0_stable_step1_results.tsv`  
-  - Sparse：`ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1_results.tsv`  
-  - None：`ablation_graph_topo_none_seed0_stable_step1_results.tsv`
+  - Full：`results/ablation_graph_topo_full_seed0_stable_step1_results.tsv`  
+  - Sparse：`results/ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1_results.tsv`  
+  - None：`results/ablation_graph_topo_none_seed0_stable_step1_results.tsv`
 
 ### 5.7 Progressive sampler distill（多步学生：20→4→2→1 模板）
 

@@ -16,16 +16,16 @@
 
 | Stack | Dataset | Setting | n_runs | mean_AP | std_AP | Source |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-| DiffusionDet baseline | repro_10k | step1 | 15 | 46.43 | 0.78 | `baseline_step1_results.tsv` |
-| DiffusionDet baseline | repro_10k | step5 | 15 | 48.29 | 0.68 | `baseline_step5_results.tsv` |
-| D3PM+QHead warmstart | repro_10k | step1 | 15 | 46.91 | 0.68 | `d3pm_qhead_warmstart_step1_results.tsv` |
-| Sampler distill + GEO_FEAT (deliverable) | repro_10k | step1 | 25 | 48.54 | 0.84 | `final_step1_5seed_geofeat_mix.tsv` |
+| DiffusionDet baseline | repro_10k | step1 | 15 | 46.43 | 0.78 | `results/baseline_step1_results.tsv` |
+| DiffusionDet baseline | repro_10k | step5 | 15 | 48.29 | 0.68 | `results/baseline_step5_results.tsv` |
+| D3PM+QHead warmstart | repro_10k | step1 | 15 | 46.91 | 0.68 | `results/d3pm_qhead_warmstart_step1_results.tsv` |
+| Sampler distill + GEO_FEAT (deliverable) | repro_10k | step1 | 25 | 48.54 | 0.84 | `results/final_step1_5seed_geofeat_mix.tsv` |
 
 完整索引：`results_manifest.tsv`（包含更多消融/扫参条目）。
 
 ### MMDet3（LVIS / CrowdHuman）
 
-来源：`rerun_mmdet3_lvis_crowdhuman_summary.tsv`
+来源：`results/rerun_mmdet3_lvis_crowdhuman_summary.tsv`
 
 | Dataset | baseline_name | step | mean_AP | std_AP | mean_fps | ckpt |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -40,6 +40,7 @@
 
 - `baselines/`：Detectron2 baselines（DiffusionDet、DETR 等）。`baselines/data/`、`baselines/checkpoints/`、`baselines/output/`、`baselines/evals/` 为本地数据/产物目录（默认不入库）。
 - `mmdet_diffusers/`：MMDet3 插件 + Diffusers 风格 pipeline/scheduler/collate（对齐 `check.md` 的工程形态）。
+- `results/`：评测 TSV、rerun manifest/summary 等轻量结果文件。
 - `scripts/`：评测多 seed、生成 manifest/summary 的脚本。
 - `deliverables/`：小体量“冻结交付”与规范示例（不包含大 ckpt）。
 - `check.md`：需求/路线文档；对齐差距与路线图见 `checkmd_parity.md`、`checkmd_mmdet_diffusers_stub.md`。
@@ -52,3 +53,13 @@
   - Detectron2 多 eval_seed：`scripts/eval_multiseed.py`
   - MMDet3 多 eval_seed：`scripts/eval_mmdet3_multiseed.py`
 
+## Weights & Biases（W&B）
+
+本仓库的 `scripts/eval_multiseed.py` / `scripts/eval_mmdet3_multiseed.py` 支持自动把评测 TSV 与汇总指标在线记录到 W&B：
+
+- 配置方式（本地，不入库）：
+  - `cp .env.example .env`，填入 `WANDB_API_KEY`、`WANDB_PROJECT`（以及可选 `WANDB_ENTITY`）
+  - `.env` 已在 `.gitignore` 里，禁止提交
+- 开关：
+  - 默认：当检测到 `WANDB_PROJECT` 或 `WANDB_API_KEY` 时自动开启
+  - 可显式关闭：在命令行加 `--no-wandb`

@@ -84,15 +84,15 @@ run_stage () {
 CKPT20="$TEACHER20"
 
 CKPT4="$REPO_ROOT/baselines/checkpoints/${OUT_PREFIX}_20to4_iter${MAX_ITER}.pth"
-TSV4="$REPO_ROOT/${OUT_PREFIX}_20to4_iter${MAX_ITER}_step1_results.tsv"
+TSV4="$REPO_ROOT/results/${OUT_PREFIX}_20to4_iter${MAX_ITER}_step1_results.tsv"
 run_stage "${OUT_PREFIX}_20to4" "diffdet.repro_10k_d3pm_mask_dist_qhead_sampler_distill_20to4.yaml" "$CKPT20" "$STUDENT_INIT" "$CKPT4" "$TSV4"
 
 CKPT2="$REPO_ROOT/baselines/checkpoints/${OUT_PREFIX}_4to2_iter${MAX_ITER}.pth"
-TSV2="$REPO_ROOT/${OUT_PREFIX}_4to2_iter${MAX_ITER}_step1_results.tsv"
+TSV2="$REPO_ROOT/results/${OUT_PREFIX}_4to2_iter${MAX_ITER}_step1_results.tsv"
 run_stage "${OUT_PREFIX}_4to2" "diffdet.repro_10k_d3pm_mask_dist_qhead_sampler_distill_4to2.yaml" "$CKPT4" "$CKPT4" "$CKPT2" "$TSV2"
 
 CKPT1="$REPO_ROOT/baselines/checkpoints/${OUT_PREFIX}_2to1_iter${MAX_ITER}.pth"
-TSV1="$REPO_ROOT/${OUT_PREFIX}_2to1_iter${MAX_ITER}_step1_results.tsv"
+TSV1="$REPO_ROOT/results/${OUT_PREFIX}_2to1_iter${MAX_ITER}_step1_results.tsv"
 run_stage "${OUT_PREFIX}_2to1" "diffdet.repro_10k_d3pm_mask_dist_qhead_sampler_distill_2to1.yaml" "$CKPT2" "$CKPT2" "$CKPT1" "$TSV1"
 
 echo "Done."

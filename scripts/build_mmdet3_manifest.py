@@ -136,7 +136,7 @@ def main() -> int:
     ap.add_argument("--baseline-name", required=True)
     ap.add_argument("--results-tsv", required=True)
     ap.add_argument("--manifest-out", required=True)
-    ap.add_argument("--summary-out", default="rerun_mmdet3_lvis_crowdhuman_summary.tsv")
+    ap.add_argument("--summary-out", default="results/rerun_mmdet3_lvis_crowdhuman_summary.tsv")
     ap.add_argument("--update-summary", action=argparse.BooleanOptionalAction, default=True)
     args = ap.parse_args()
 

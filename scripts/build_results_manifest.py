@@ -11,6 +11,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+RESULTS_DIR = REPO_ROOT / "results"
 
 
 def sha256_file(path: Path) -> str:
@@ -365,7 +366,7 @@ def main() -> int:
         )
 
         for e in ENTRIES:
-            tsv = (REPO_ROOT / e.tsv_path).resolve()
+            tsv = (RESULTS_DIR / e.tsv_path).resolve()
             aps = load_aps(tsv)
             mean, std = mean_std(aps)
 
@@ -380,7 +381,7 @@ def main() -> int:
             w.writerow(
                 [
                     e.exp_id,
-                    e.tsv_path,
+                    str(Path("results") / e.tsv_path),
                     e.ckpt_path_or_pattern,
                     sha,
                     len(aps),
