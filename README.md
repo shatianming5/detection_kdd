@@ -29,12 +29,12 @@
 
 | Dataset | baseline_name | step | mean_AP | std_AP | mean_fps | ckpt |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter10k_step10 | 10 | 0.00 | 0.00 | 3.74 | iter_10000.pth |
-| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter10k_step1 | 1 | 0.00 | 0.00 | 13.82 | iter_10000.pth |
-| crowdhuman | crowdhuman_iter_10000_crowdhuman_graph_diffusion_r50_fpn_teacher_focal_iter10k_step10 | 10 | 45.99 | 0.06 | 5.05 | iter_10000.pth |
 | crowdhuman | crowdhuman_iter_10000_crowdhuman_graph_diffusion_r50_fpn_teacher_focal_iter10k_step1 | 1 | 59.33 | 0.15 | 24.44 | iter_10000.pth |
-| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_step10 | 10 | 0.00 | 0.00 | 1.71 | iter_10000.pth |
+| crowdhuman | crowdhuman_iter_10000_crowdhuman_graph_diffusion_r50_fpn_teacher_focal_iter10k_step10 | 10 | 45.99 | 0.06 | 5.05 | iter_10000.pth |
+| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter10k_step1 | 1 | 0.00 | 0.00 | 13.82 | iter_10000.pth |
+| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter10k_step10 | 10 | 0.00 | 0.00 | 3.74 | iter_10000.pth |
 | lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_step1 | 1 | 0.00 | 0.00 | 13.85 | iter_10000.pth |
+| lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_step10 | 10 | 0.00 | 0.00 | 1.71 | iter_10000.pth |
 
 ## 目录结构（省略数据与大产物）
 
