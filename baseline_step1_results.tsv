@@ -1,0 +1,16 @@
+variant	train_seed	eval_seed	sample_step	AP	AP50	AP75	APs	APm	APl	out_dir
+baseline	0	0	1	47.3515	73.8125	50.9266	19.9309	54.3589	71.4443	/dev/shm/diffdet_eval_baseline_seed0_evalseed0
+baseline	0	1	1	46.1699	73.1318	47.0347	19.5352	52.6445	72.8926	/dev/shm/diffdet_eval_baseline_seed0_evalseed1
+baseline	0	2	1	47.3498	75.7807	49.7954	20.1683	53.5894	73.1818	/dev/shm/diffdet_eval_baseline_seed0_evalseed2
+baseline	0	3	1	47.6471	74.9580	49.3804	19.7600	53.9726	76.2110	/dev/shm/diffdet_eval_baseline_seed0_evalseed3
+baseline	0	4	1	46.9283	73.5582	47.9564	17.7422	54.5570	74.5335	/dev/shm/diffdet_eval_baseline_seed0_evalseed4
+baseline	1	0	1	46.9127	73.0538	49.4607	19.2006	53.7274	73.5985	/dev/shm/diffdet_eval_baseline_seed1_evalseed0
+baseline	1	1	1	45.8030	72.3526	47.1552	18.6611	52.8024	72.2163	/dev/shm/diffdet_eval_baseline_seed1_evalseed1
+baseline	1	2	1	46.7428	74.1571	45.7866	17.8449	54.7174	73.4101	/dev/shm/diffdet_eval_baseline_seed1_evalseed2
+baseline	1	3	1	45.2041	72.6536	45.9006	17.1603	52.9648	72.5823	/dev/shm/diffdet_eval_baseline_seed1_evalseed3
+baseline	1	4	1	44.7610	70.4372	44.2286	18.8926	52.2680	71.7265	/dev/shm/diffdet_eval_baseline_seed1_evalseed4
+baseline	2	0	1	45.8750	71.8863	48.2156	19.3958	52.9936	70.9585	/dev/shm/diffdet_eval_baseline_seed2_evalseed0
+baseline	2	1	1	46.4856	73.4145	47.8509	18.7765	53.5684	72.4789	/dev/shm/diffdet_eval_baseline_seed2_evalseed1
+baseline	2	2	1	46.6263	74.0223	49.0986	19.1928	53.2941	71.7118	/dev/shm/diffdet_eval_baseline_seed2_evalseed2
+baseline	2	3	1	46.6601	73.5054	48.6839	18.3123	53.3970	73.2763	/dev/shm/diffdet_eval_baseline_seed2_evalseed3
+baseline	2	4	1	45.9218	71.9541	46.9688	19.2883	52.6975	71.1271	/dev/shm/diffdet_eval_baseline_seed2_evalseed4

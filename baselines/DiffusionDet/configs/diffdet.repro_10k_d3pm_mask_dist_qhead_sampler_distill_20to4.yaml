@@ -1,0 +1,9 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead_sampler_distill_20to1.yaml"
+MODEL:
+  DiffusionDet:
+    # Progressive distill template: teacher(step20) -> student(step4)
+    SAMPLE_STEP: 4
+    SAMPLER_DISTILL_TEACHER_SAMPLE_STEP: 20
+    SAMPLER_DISTILL_STUDENT_SAMPLE_STEP: 4
+    SAMPLER_DISTILL_TEACHER_ETA: 0.0
+    SAMPLER_DISTILL_STUDENT_ETA: 0.0

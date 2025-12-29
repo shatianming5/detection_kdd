@@ -1,0 +1,12 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+MODEL:
+  DiffusionDet:
+    # Phase 3: teacher -> student consistency distillation (training entry).
+    # You MUST provide a teacher checkpoint on the command line:
+    #   MODEL.DiffusionDet.CONSISTENCY_TEACHER_WEIGHTS /path/to/teacher.pth
+    CONSISTENCY_DISTILL: True
+    CONSISTENCY_TEACHER_WEIGHTS: ""
+    # Distill teacher's predicted boxes/logits on the same noisy proposals & timestep.
+    CONSISTENCY_DISTILL_BOX_WEIGHT: 1.0
+    CONSISTENCY_DISTILL_CLS_WEIGHT: 0.0
+    CONSISTENCY_DISTILL_CLS_TEMPERATURE: 1.0

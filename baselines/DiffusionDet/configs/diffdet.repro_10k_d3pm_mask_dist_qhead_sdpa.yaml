@@ -1,0 +1,7 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+# check.md:6.2 — FlashAttention-2 integration (via PyTorch SDPA) template.
+MODEL:
+  DiffusionDet:
+    SELF_ATTN_IMPL: "sdpa"
+    SELF_ATTN_SDPA_BACKEND: "auto"
+

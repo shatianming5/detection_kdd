@@ -1,0 +1,21 @@
+{
+  "rows": [
+    {
+      "method": "DiffusionDet (baseline)",
+      "type": "Diffusion",
+      "backbone": "R50-FPN",
+      "epochs": "—",
+      "exp_id": "baseline_step1_flat_train012",
+      "notes": "This repo currently tracks Repro-10k; replace with COCO/LVIS exp_id once you run them."
+    },
+    {
+      "method": "C2O-GND-Fast (distill)",
+      "type": "Consistency/Distill",
+      "backbone": "R50-FPN",
+      "epochs": "—",
+      "exp_id": "final_step1_5seed_geofeat_mix_flat_train0to4",
+      "notes": "Frozen deliverable on Repro-10k; not COCO."
+    }
+  ]
+}
+

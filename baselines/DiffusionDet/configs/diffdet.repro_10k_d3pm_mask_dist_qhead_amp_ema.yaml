@@ -1,0 +1,11 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+# check.md:6.4 Scale-up (template)
+# Notes:
+# - This repo does not include Objects365/LVIS/CrowdHuman pipelines; this config only toggles AMP/EMA switches.
+# - AMP/EMA behavior depends on the detectron2 version and GPU capability.
+SOLVER:
+  AMP:
+    ENABLED: True
+MODEL_EMA:
+  ENABLED: True
+  DECAY: 0.999

@@ -1,0 +1,8 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+MODEL:
+  DiffusionDet:
+    # check.md:7.3-1 ablation — Independent nodes (no proposal interaction)
+    DISABLE_SELF_ATTN: True
+    GEO_BIAS: False
+    GEO_FEAT: False
+    GRAPH_TOPO_LOSS_WEIGHT: 0.0

@@ -1,0 +1,9 @@
+_BASE_: "diffdet.coco.res50.yaml"
+# check.md:6.2 / 7.3-2 — Hybrid (D3PM) vs Gaussian label diffusion (COCO template)
+MODEL:
+  DiffusionDet:
+    LABEL_STATE: True
+    LABEL_D3PM: True
+    LABEL_D3PM_KERNEL: "mask"
+    LABEL_D3PM_USE_DISTRIBUTION: True
+    QUALITY_HEAD: True

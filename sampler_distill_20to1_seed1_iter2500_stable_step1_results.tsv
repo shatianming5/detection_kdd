@@ -1,0 +1,6 @@
+eval_seed	AP	AP50	AP75	APs	APm	APl	out_dir
+0	46.4893	72.8736	49.3608	18.6297	53.3295	70.8869	/dev/shm/diffdet_eval_sampler_distill_20to1_iter2500_seed1_stable_step1/evalseed0
+1	46.9395	73.7879	50.2935	17.5962	55.0965	70.4174	/dev/shm/diffdet_eval_sampler_distill_20to1_iter2500_seed1_stable_step1/evalseed1
+2	47.5090	74.6023	50.4503	19.1506	55.6117	70.8810	/dev/shm/diffdet_eval_sampler_distill_20to1_iter2500_seed1_stable_step1/evalseed2
+3	45.6906	74.0664	48.9349	20.6882	51.5112	68.8218	/dev/shm/diffdet_eval_sampler_distill_20to1_iter2500_seed1_stable_step1/evalseed3
+4	47.0766	75.2300	49.6328	19.1936	54.5215	71.6389	/dev/shm/diffdet_eval_sampler_distill_20to1_iter2500_seed1_stable_step1/evalseed4

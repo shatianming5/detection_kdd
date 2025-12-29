@@ -1,0 +1,16 @@
+variant	train_seed	eval_seed	sample_step	AP	AP50	AP75	APs	APm	APl	out_dir
+d3pm_qhead	0	0	1	44.6135	70.2328	44.8699	17.0365	51.6197	69.5903	/dev/shm/diffdet_eval_d3pm_qhead_seed0_evalseed0
+d3pm_qhead	0	1	1	44.3665	68.4025	45.5851	16.5775	51.4490	71.2361	/dev/shm/diffdet_eval_d3pm_qhead_seed0_evalseed1
+d3pm_qhead	0	2	1	44.5458	70.8305	45.9137	15.8826	51.9227	70.7770	/dev/shm/diffdet_eval_d3pm_qhead_seed0_evalseed2
+d3pm_qhead	0	3	1	43.7618	70.0870	42.5252	16.0504	51.6293	69.7191	/dev/shm/diffdet_eval_d3pm_qhead_seed0_evalseed3
+d3pm_qhead	0	4	1	43.9840	69.3984	46.3221	16.5526	50.8908	71.4149	/dev/shm/diffdet_eval_d3pm_qhead_seed0_evalseed4
+d3pm_qhead	1	0	1	47.2384	76.0711	48.7387	19.5484	54.8067	71.9784	/dev/shm/diffdet_eval_d3pm_qhead_seed1_evalseed0
+d3pm_qhead	1	1	1	47.6010	74.3349	50.5670	19.2830	55.3233	73.1911	/dev/shm/diffdet_eval_d3pm_qhead_seed1_evalseed1
+d3pm_qhead	1	2	1	47.7972	75.5557	51.0870	17.9269	55.6406	75.2130	/dev/shm/diffdet_eval_d3pm_qhead_seed1_evalseed2
+d3pm_qhead	1	3	1	47.4179	75.2235	50.4708	19.1317	54.6730	74.7463	/dev/shm/diffdet_eval_d3pm_qhead_seed1_evalseed3
+d3pm_qhead	1	4	1	47.6245	74.4546	51.7158	20.0407	55.7326	73.0837	/dev/shm/diffdet_eval_d3pm_qhead_seed1_evalseed4
+d3pm_qhead	2	0	1	42.6854	67.5180	42.1456	17.3027	48.9146	68.2728	/dev/shm/diffdet_eval_d3pm_qhead_seed2_evalseed0
+d3pm_qhead	2	1	1	42.7878	67.3020	44.0507	16.9642	49.7410	71.6405	/dev/shm/diffdet_eval_d3pm_qhead_seed2_evalseed1
+d3pm_qhead	2	2	1	42.3914	67.5242	44.1835	15.4740	49.1131	74.4868	/dev/shm/diffdet_eval_d3pm_qhead_seed2_evalseed2
+d3pm_qhead	2	3	1	42.3996	67.5132	41.7663	15.9702	49.2525	72.2478	/dev/shm/diffdet_eval_d3pm_qhead_seed2_evalseed3
+d3pm_qhead	2	4	1	42.8872	67.8483	43.1267	19.0808	48.7445	70.8868	/dev/shm/diffdet_eval_d3pm_qhead_seed2_evalseed4

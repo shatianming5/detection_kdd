@@ -1,0 +1,6 @@
+sample_step	eval_seed	AP	AP50	AP75	APs	APm	APl	out_dir
+20	0	49.7815	77.7996	50.4543	21.7324	57.1163	76.6241	/dev/shm/diffdet_eval_warmstart_seed0_step20/step20_evalseed0
+20	1	49.0305	77.1788	50.0730	20.9054	56.1201	75.3855	/dev/shm/diffdet_eval_warmstart_seed0_step20/step20_evalseed1
+20	2	50.1634	78.0696	51.9115	21.7920	57.4554	75.1027	/dev/shm/diffdet_eval_warmstart_seed0_step20/step20_evalseed2
+20	3	49.7891	77.3032	51.2882	20.9636	57.4512	75.9499	/dev/shm/diffdet_eval_warmstart_seed0_step20/step20_evalseed3
+20	4	49.2652	77.4246	49.2975	21.4240	56.6065	75.8933	/dev/shm/diffdet_eval_warmstart_seed0_step20/step20_evalseed4

@@ -1,0 +1,4 @@
+GEO_FEAT_LR_MULT	mean_AP	std_AP_pop	results_tsv
+100	47.49318	0.54085	sampler_distill_20to1_seed1_iter2500_stable_geofeat_ft_iter1000_lrmult100_step1_results.tsv
+150	47.41784	0.38821	sampler_distill_20to1_seed1_iter2500_stable_geofeat_ft_iter1000_lrmult150_step1_results.tsv
+200	46.76690	0.43049	sampler_distill_20to1_seed1_iter2500_stable_geofeat_ft_iter1000_lrmult200_step1_results.tsv

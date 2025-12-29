@@ -1,0 +1,13 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+MODEL:
+  DiffusionDet:
+    # check.md:7.3-1 ablation — Sparse graph (kNN topology via attention mask)
+    DISABLE_SELF_ATTN: False
+    GEO_BIAS: True
+    GEO_BIAS_TYPE: "distance"
+    GEO_BIAS_TOPK: 50
+    # Mask-only: keep sparsity but avoid additive bias shifting attention scores.
+    GEO_BIAS_LEARNABLE_SCALE: True
+    GEO_BIAS_SCALE: 0.0
+    GEO_FEAT: False
+    GRAPH_TOPO_LOSS_WEIGHT: 0.0

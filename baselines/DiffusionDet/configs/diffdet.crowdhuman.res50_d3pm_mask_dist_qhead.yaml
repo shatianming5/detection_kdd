@@ -1,0 +1,29 @@
+_BASE_: "Base-DiffusionDet.yaml"
+# check.md:7.1 — CrowdHuman dense pedestrian (template, COCO-style json)
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/torchvision/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+    STRIDE_IN_1X1: False
+  ROI_HEADS:
+    NUM_CLASSES: 1
+  DiffusionDet:
+    NUM_PROPOSALS: 500
+    NUM_CLASSES: 1
+    LABEL_STATE: True
+    LABEL_D3PM: True
+    LABEL_D3PM_KERNEL: "mask"
+    LABEL_D3PM_USE_DISTRIBUTION: True
+    QUALITY_HEAD: True
+DATASETS:
+  TRAIN: ("crowdhuman_train",)
+  TEST: ("crowdhuman_val",)
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.000025
+  MAX_ITER: 10000
+  CHECKPOINT_PERIOD: 100000000
+INPUT:
+  CROP:
+    ENABLED: True
+  FORMAT: "RGB"

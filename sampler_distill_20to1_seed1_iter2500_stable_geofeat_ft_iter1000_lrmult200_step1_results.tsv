@@ -1,0 +1,6 @@
+eval_seed	AP	AP50	AP75	APs	APm	APl	out_dir
+0	46.5634	73.1700	47.5748	19.7448	53.3772	69.8538	/dev/shm/diffdet_eval_sampler_distill_20to1_seed1_stable_geofeat_ft_iter1000_lrmult200_step1/evalseed0
+1	46.9553	72.5905	50.8159	17.4618	54.4241	73.0411	/dev/shm/diffdet_eval_sampler_distill_20to1_seed1_stable_geofeat_ft_iter1000_lrmult200_step1/evalseed1
+2	47.5243	73.7487	51.5751	19.6035	54.6345	73.8200	/dev/shm/diffdet_eval_sampler_distill_20to1_seed1_stable_geofeat_ft_iter1000_lrmult200_step1/evalseed2
+3	46.4125	72.3289	50.1792	18.5418	53.1666	72.9808	/dev/shm/diffdet_eval_sampler_distill_20to1_seed1_stable_geofeat_ft_iter1000_lrmult200_step1/evalseed3
+4	46.3790	73.3098	48.6471	18.9218	54.1401	70.1916	/dev/shm/diffdet_eval_sampler_distill_20to1_seed1_stable_geofeat_ft_iter1000_lrmult200_step1/evalseed4

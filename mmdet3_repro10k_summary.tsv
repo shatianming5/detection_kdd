@@ -1,0 +1,4 @@
+run	framework	config	sampling_timesteps	ddim_sampling_eta	score_thr	max_per_img	mAP	AP50	AP75	APs	APm	APl	metrics_json
+mmdet3_repro10k_smoke_test	mmdet3	mmdet_diffusers/mmdet_configs/repro_10k_graph_diffusion_r50_fpn_smoke.py	1	default	0.0	500	0.0	0.0	0.0	0.0	0.0	0.0	work_dirs/repro_10k_graph_diffusion_r50_fpn_smoke/20251222_090533/20251222_090533.json
+mmdet3_repro10k_step1_test_20251222_094826	mmdet3	mmdet_diffusers/mmdet_configs/repro_10k_graph_diffusion_r50_fpn_step1.py	1	default	0.0	500	0.0	0.0	0.0	0.0	0.0	0.0	work_dirs/repro_10k_graph_diffusion_r50_fpn_step1/20251222_094826/20251222_094826.json
+mmdet3_repro10k_step1_test_20251222_095251	mmdet3	mmdet_diffusers/mmdet_configs/repro_10k_graph_diffusion_r50_fpn_step1.py	10	0.0	0.0	500	0.0	0.1	0.0	0.0	0.0	0.1	work_dirs/repro_10k_graph_diffusion_r50_fpn_step1/20251222_095251/20251222_095251.json

@@ -1,0 +1,9 @@
+_BASE_: "diffdet.coco.res50_d3pm_mask_dist_qhead.yaml"
+# check.md:6.4 Scale-up (template; COCO)
+SOLVER:
+  AMP:
+    ENABLED: True
+MODEL_EMA:
+  ENABLED: True
+  DECAY: 0.999
+

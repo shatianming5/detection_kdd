@@ -1,0 +1,9 @@
+_BASE_: "diffdet.lvis.res50.yaml"
+# check.md:7.1 / 7.3-2 — LVIS long-tail template with D3PM label diffusion
+MODEL:
+  DiffusionDet:
+    LABEL_STATE: True
+    LABEL_D3PM: True
+    LABEL_D3PM_KERNEL: "mask"
+    LABEL_D3PM_USE_DISTRIBUTION: True
+    QUALITY_HEAD: True

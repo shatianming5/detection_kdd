@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+*.out
+*.tmp
+*.swp
+
+# Large artifacts / datasets (kept locally, not pushed)
+datasets/
+repro_10k/
+repro_50k/
+repro_200k/
+
+# Detectron2 baselines: keep code, drop data/outputs/ckpts
+baselines/data/
+baselines/checkpoints/
+baselines/output/
+baselines/evals/
+baselines/DiffusionDet/output/
+
+# Embedded repos: keep as plain folders in this repo
+baselines/DiffusionDet/.git/
+baselines/detr/.git/
+**/.git_backup/
+
+# Training outputs
+work_dirs/
+
+# Checkpoints / binaries
+*.pth
+*.pt
+*.ckpt
+*.pkl
+*.npz
+
+# Archives
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+

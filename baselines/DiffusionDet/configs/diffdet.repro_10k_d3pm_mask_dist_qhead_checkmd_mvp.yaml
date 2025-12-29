@@ -1,0 +1,33 @@
+_BASE_: "diffdet.repro_10k_d3pm_mask_dist_qhead.yaml"
+MODEL:
+  DiffusionDet:
+    # check.md:6.2 — Graph modules (MVP)
+    GEO_BIAS: True
+    GEO_BIAS_TYPE: "mlp"
+    GEO_BIAS_REL_INCLUDE_IOU: True
+    GEO_BIAS_MLP_HIDDEN_DIM: 64
+    GEO_BIAS_SCALE: 1.0
+    GEO_BIAS_OUT_TANH: True
+    GEO_BIAS_TOPK: 0
+
+    # check.md:6.2 / 7.3 — Anisotropic box diffusion noise (MVP)
+    ANISO_NOISE: True
+    ANISO_NOISE_SIGMA_XY: 1.0
+    ANISO_NOISE_SIGMA_W: 2.0
+    ANISO_NOISE_SIGMA_H: 2.0
+
+    # check.md:5.3 — Graph topology consistency loss (MVP)
+    GRAPH_TOPO_LOSS_WEIGHT: 1.0
+    GRAPH_TOPO_IOU_THRESH: 0.1
+    GRAPH_TOPO_TARGET_NORM: "row"
+
+    # check.md:5.2 — Quality Focal Loss (MVP)
+    CLS_LOSS_TYPE: "qfl"
+    QFL_BETA: 2.0
+
+    # check.md:5.1 — IoU-aware regression weighting (MVP)
+    BOX_LOSS_IOU_WEIGHT_POWER: 1.0
+SOLVER:
+  # Keep the same "stable finetune" LR convention used elsewhere in this repo.
+  BASE_LR: 0.0000025
+  BACKBONE_MULTIPLIER: 0.0

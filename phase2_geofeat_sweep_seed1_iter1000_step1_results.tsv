@@ -1,0 +1,16 @@
+variant	train_seed	eval_seed	sample_step	max_iter	geo_feat_lr_mult	AP	AP50	AP75	APs	APm	APl	out_dir
+phase2_geofeat_iter1000_lrmult50	1	0	1	1000	50	46.9136	74.1675	49.4533	18.7961	53.7756	73.4005	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult50_evalseed0
+phase2_geofeat_iter1000_lrmult50	1	1	1	1000	50	47.5019	73.9562	51.5221	20.0804	55.3687	70.1504	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult50_evalseed1
+phase2_geofeat_iter1000_lrmult50	1	2	1	1000	50	48.1696	74.8698	50.4768	18.5354	56.3122	71.7862	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult50_evalseed2
+phase2_geofeat_iter1000_lrmult50	1	3	1	1000	50	46.4592	74.0394	49.5383	19.4235	53.3319	73.2839	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult50_evalseed3
+phase2_geofeat_iter1000_lrmult50	1	4	1	1000	50	45.926	72.5209	48.407	18.9231	53.2741	69.9686	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult50_evalseed4
+phase2_geofeat_iter1000_lrmult150	1	0	1	1000	150	47.6287	73.7382	49.8502	20.9412	53.9227	72.9047	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult150_evalseed0
+phase2_geofeat_iter1000_lrmult150	1	1	1	1000	150	47.0639	73.7632	51.3552	19.5369	54.2487	71.7645	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult150_evalseed1
+phase2_geofeat_iter1000_lrmult150	1	2	1	1000	150	47.806	73.765	49.822	18.7338	55.7464	72.7624	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult150_evalseed2
+phase2_geofeat_iter1000_lrmult150	1	3	1	1000	150	46.8052	74.3181	48.2653	19.9757	53.5658	72.7487	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult150_evalseed3
+phase2_geofeat_iter1000_lrmult150	1	4	1	1000	150	47.0128	73.9623	50.8641	20.5542	53.3251	70.7735	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult150_evalseed4
+phase2_geofeat_iter1000_lrmult200	1	0	1	1000	200	47.1319	72.5383	50.946	19.2895	53.744	72.6627	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult200_evalseed0
+phase2_geofeat_iter1000_lrmult200	1	1	1	1000	200	47.3378	74.163	50.498	20.6271	54.2609	72.0525	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult200_evalseed1
+phase2_geofeat_iter1000_lrmult200	1	2	1	1000	200	48.0401	74.0657	51.9942	18.8812	55.5651	73.3586	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult200_evalseed2
+phase2_geofeat_iter1000_lrmult200	1	3	1	1000	200	46.2015	72.735	49.2409	17.9064	53.0449	73.581	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult200_evalseed3
+phase2_geofeat_iter1000_lrmult200	1	4	1	1000	200	46.9208	72.9279	50.5885	20.7528	53.0859	72.3991	/dev/shm/diffdet_eval_phase2_sweep_seed1_iter1000_lrmult200_evalseed4

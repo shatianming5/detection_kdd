@@ -1,0 +1,6 @@
+sample_step	eval_seed	AP	AP50	AP75	APs	APm	APl	out_dir
+10	0	49.7885	77.8491	51.3927	20.9719	57.6080	75.8445	/home/ubuntu/tiasha/archives/baselines/output/phase3_eval_warmstart_seed0_step10_20251219_023034/evalseed0
+10	1	49.4252	77.1058	50.4051	20.2277	57.5182	74.5241	/home/ubuntu/tiasha/archives/baselines/output/phase3_eval_warmstart_seed0_step10_20251219_023034/evalseed1
+10	2	48.7772	78.0901	50.9348	20.3910	56.5737	72.4385	/home/ubuntu/tiasha/archives/baselines/output/phase3_eval_warmstart_seed0_step10_20251219_023034/evalseed2
+10	3	49.1288	77.3239	50.6172	21.0593	56.7467	75.3741	/home/ubuntu/tiasha/archives/baselines/output/phase3_eval_warmstart_seed0_step10_20251219_023034/evalseed3
+10	4	49.2941	77.7623	51.2669	21.3909	56.5270	75.2072	/home/ubuntu/tiasha/archives/baselines/output/phase3_eval_warmstart_seed0_step10_20251219_023034/evalseed4
