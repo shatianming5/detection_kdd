@@ -57,7 +57,7 @@
 |---|---|---|---|
 | 6.1 Baseline 复现 | `run_baselines.sh` + `baselines/DiffusionDet/configs/diffdet.repro_10k.yaml` | ✅ 已跑通（R50-FPN） | `bash run_baselines.sh` 或 `cd baselines/DiffusionDet && python train_net.py --config-file configs/diffdet.repro_10k.yaml --num-gpus 1 SOLVER.MAX_ITER 500 OUTPUT_DIR /dev/shm/diffdet_smoke` |
 | 6.1 Swin-B baseline | `baselines/DiffusionDet/configs/diffdet.repro_10k.swinbase.yaml` | ✅ 已补齐（可选跑） | `RUN_DIFFDET_SWIN=1 DIFFDET_MODELS_DIR=/dev/shm/diffdet_models OUTPUT_BASE=/dev/shm bash run_baselines.sh` |
-| 6.2 D3PM Scheduler / label diffusion | `baselines/DiffusionDet/diffusiondet/detector.py:_label_d3pm_forward` | ✅ 已实现（mask/uniform） | 见 `plan.md` 3.3/3.6/3.12（D3PM 训练与 eval-only 复验） |
+| 6.2 D3PM Scheduler / label diffusion | `baselines/DiffusionDet/diffusiondet/detector.py:_label_d3pm_forward` | ✅ 已实现（mask/uniform） | 见 `docs/plan.md` 3.3/3.6/3.12（D3PM 训练与 eval-only 复验） |
 | 6.2 各向异性 box 噪声 | `baselines/DiffusionDet/diffusiondet/detector.py:q_sample/ddim_sample` | ✅ 已实现（可开关） | `--eval-only` 对比：加 `MODEL.DiffusionDet.ANISO_NOISE True MODEL.DiffusionDet.ANISO_NOISE_SIGMA_W 2.0 MODEL.DiffusionDet.ANISO_NOISE_SIGMA_H 2.0` 看 AP/是否 NaN |
 | 6.2 Graph / 拓扑约束 | `baselines/DiffusionDet/diffusiondet/loss.py:loss_graph`（用 attention 做邻接） | ✅ 已实现（可开关） | 训练时加 `MODEL.DiffusionDet.GRAPH_TOPO_LOSS_WEIGHT 1.0`，观察 log 里 `loss_graph` 非 0 且训练不崩 |
 | 6.3 Quality Head | `baselines/DiffusionDet/diffusiondet/head.py` | ✅ 已实现 | 用 `configs/diffdet.repro_10k_d3pm_mask_dist_qhead.yaml` 跑 500 iter，log 中出现 `loss_quality` |

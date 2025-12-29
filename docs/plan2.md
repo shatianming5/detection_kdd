@@ -4,7 +4,7 @@
 
 目标：把当前仓库里“已经跑过/已经验证过/已经证伪”的所有关键实验，用**同一口径**汇总成一份可执行、可复验、可追溯的台账与下一步计划，避免结果口径混乱。
 
-> 说明：`plan.md` 仍保留作为“长文说明/命令模板/历史笔记”，且你之前引用过 `plan.md:43 / plan.md:903` 的行号；为避免行号漂移，本文件 `plan2.md` 作为新的主索引与总计划，不再依赖 `plan.md` 的行号引用。
+> 说明：`docs/plan.md` 仍保留作为“长文说明/命令模板/历史笔记”，且你之前引用过 `docs/plan.md:43 / docs/plan.md:903` 的行号；为避免行号漂移，本文件 `docs/plan2.md` 作为新的主索引与总计划，不再依赖 `docs/plan.md` 的行号引用。
 
 ---
 
@@ -162,7 +162,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 ### 3.1 A：baseline 复现验收（整条链路）
 
 1) 历史 baseline（可追溯输出）  
-- 证据：`PROGRESS.md:25`（`baselines/output/20251212_225009/`）  
+- 证据：`docs/PROGRESS.md:25`（`baselines/output/20251212_225009/`）  
 - 结论：DiffusionDet bbox AP=45.496；DETR bbox AP=0.5457（54.57）
 
 2) 最近一次 A（跑在 `/dev/shm`，已清理输出，仅保留本台账记录）  
@@ -172,25 +172,25 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 ### 3.2 Phase 1：几何注入（GEO_BIAS / GEO_FEAT）——结论：从零训练不稳，warmstart 可用但方差大
 
-证据来源：`PROGRESS.md:44` 起的整段实验记录。
+证据来源：`docs/PROGRESS.md:44` 起的整段实验记录。
 
 - 从零训练期开启 `GEO_FEAT`：短跑 2500 iter 多次出现 AP≈0/极低（收敛被阻断）  
-  - 代表结果：`PROGRESS.md:223`（baseline AP=17.61；GEO_FEAT 多配置 AP≈0~1）
+  - 代表结果：`docs/PROGRESS.md:223`（baseline AP=17.61；GEO_FEAT 多配置 AP≈0~1）
   - 结论：❌ 不建议继续“从零训练期开启 GEO_FEAT”的路线
 - warmstart（从已收敛 10k baseline finetune）：可小幅提点，但多 seed 方差大  
-  - 代表结果：`PROGRESS.md:246`（best 单点可到 47.02；seed0..7 mean=46.95 std=0.90）  
+  - 代表结果：`docs/PROGRESS.md:246`（best 单点可到 47.02；seed0..7 mean=46.95 std=0.90）  
   - 结论：✅ 作为“可用路线”；但要按多 seed/均值口径验收
 
 ### 3.3 Phase 2(A)：label_state（unk 吸收态）——结论：不掉点（均值几乎不变）
 
-证据来源：`PROGRESS.md:479`。
+证据来源：`docs/PROGRESS.md:479`。
 
 - 2500 iter（seed42 训练）+ eval-only 多 seed 对照：ΔAP mean=-0.0232，std=0.8653  
   - 结论：✅ “不掉点/链路可控”验收通过；单次 eval 波动大，必须多 seed
 
 ### 3.4 Phase 2（离散 label diffusion / D3PM）与 warmstart
 
-证据来源：根目录 TSV（见 2.2）+ `plan.md` 的命令模板。
+证据来源：根目录 TSV（见 2.2）+ `docs/plan.md` 的命令模板。
 
 - 非 warmstart 的 D3PM+QHead：均值低且方差大（step1：44.81±2.06）  
   - 结论：❌ 不作为主线
@@ -201,15 +201,15 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 ### 3.5 Phase 3：Quality head / guidance
 
-证据来源：`PROGRESS.md:313` 起 + `results/guidance_sweep_results_qhead_seed42*.tsv`。
+证据来源：`docs/PROGRESS.md:313` 起 + `results/guidance_sweep_results_qhead_seed42*.tsv`。
 
 - 质量头工程接入已完成，并定位修复过“掉点/AP=0/无预测”等问题（详见 PROGRESS）  
-- 更稳定的落地收益：`QUALITY_SCORE_REWEIGHT=True`（见 `PROGRESS.md:470`）在多 seed 下稳定增益  
+- 更稳定的落地收益：`QUALITY_SCORE_REWEIGHT=True`（见 `docs/PROGRESS.md:470`）在多 seed 下稳定增益  
 - guidance sweep 已留表，但当前主线优先级低于 distill（因为 distill 直接解决推理成本）
 
 ### 3.6 Phase 3：sampler distill（step20→step1 真加速）——当前主线
 
-证据来源：`plan.md` Phase 3 章节 + distill TSV + 已固化的 checkpoints。
+证据来源：`docs/plan.md` Phase 3 章节 + distill TSV + 已固化的 checkpoints。
 
 1) stable 配方（teacher eta=0, topk=100, base_lr=2.5e-6）已跑通，并在 seed0 上非常强：49.48±0.43  
 2) stable distill 已扩展到 train_seed=0..4（eval_seed=0..4）：flatten mean/std **48.1163 / 1.0920**（见 2.2）。  
@@ -316,7 +316,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 ---
 
-### 5.5 对齐 `check.md` 的缺口补齐（MVP + 证据落盘）
+### 5.5 对齐 `docs/check.md` 的缺口补齐（MVP + 证据落盘）
 
 已补齐（代码项，默认关闭，不影响现有结论）：
 
@@ -326,16 +326,16 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 已补齐（证据链：ckpt + tsv，可复验）：
 
-- check.md Phase2/5.* “混合损失 + 图模块 + 各向异性噪声”组合 smoke（train_seed=0，200 iter）：
+- docs/check.md Phase2/5.* “混合损失 + 图模块 + 各向异性噪声”组合 smoke（train_seed=0，200 iter）：
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_checkmd_mvp.yaml`
   - ckpt：`baselines/checkpoints/checkmd_mvp_seed0_iter200.pth`
   - TSV：`results/checkmd_mvp_seed0_iter200_step1_results.tsv`（eval_seed=0..4 mean/std **47.5333 / 0.3146**）
-- check.md Phase3 “Consistency Distillation” smoke（train_seed=0，50 iter；仅验收 loss 链路 + 落盘）：
+- docs/check.md Phase3 “Consistency Distillation” smoke（train_seed=0，50 iter；仅验收 loss 链路 + 落盘）：
   - config：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_consistency_distill.yaml`
   - ckpt：`baselines/checkpoints/checkmd_consistency_smoke_seed0_iter50.pth`
   - TSV：`results/checkmd_consistency_smoke_seed0_iter50_step1_results.tsv`（eval_seed=0..4 mean/std **47.4060 / 0.5396**）
 
-### 5.6 对齐 `check.md` 的指标/消融口径（FPS + 图拓扑）
+### 5.6 对齐 `docs/check.md` 的指标/消融口径（FPS + 图拓扑）
 
 - FPS 落盘：`scripts/eval_multiseed.py` 已新增 `inference_s_per_img` / `inference_fps` 两列（从 detectron2 eval 日志解析；硬件相关）
 - 图拓扑消融开关：
@@ -348,7 +348,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 ### 5.7 Progressive sampler distill（多步学生：20→4→2→1 模板）
 
-为对齐 `check.md` 中“逐步把采样步数从 1000 减到 4，再到 2”的工程能力，本仓库已补齐：
+为对齐 `docs/check.md` 中“逐步把采样步数从 1000 减到 4，再到 2”的工程能力，本仓库已补齐：
 
 - 多步学生训练支持：当 `SAMPLER_DISTILL_STUDENT_SAMPLE_STEP>1` 时，distill loss 会在训练时真实运行学生 sampler（会更慢、更占显存）
 - 模板 config：  
@@ -361,7 +361,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 
 - 仅提供开关示例（不代表已在大规模数据/多卡上验收）：`baselines/DiffusionDet/configs/diffdet.repro_10k_d3pm_mask_dist_qhead_amp_ema.yaml`
 
-### 5.9 check.md Phase1/Phase2 的“工程补齐”（torch.compile + COCO/LVIS/VOC 模板）
+### 5.9 docs/check.md Phase1/Phase2 的“工程补齐”（torch.compile + COCO/LVIS/VOC 模板）
 
 - torch.compile（实验性）：`SOLVER.TORCH_COMPILE*`（代码入口：`baselines/DiffusionDet/train_net.py`）
 - Detectron2 builtin 数据集注册：`baselines/DiffusionDet/train_net.py` 会注册 COCO/LVIS/VOC（依赖 `$DETECTRON2_DATASETS`）
@@ -372,7 +372,7 @@ stable + GEO_FEAT finetune（`MAX_ITER=1000, BASE_LR=2.5e-6, BACKBONE_MULTIPLIER
 - 额外 COCO-style 数据集注册（CrowdHuman / Objects365 / 自定义）：`baselines/DiffusionDet/train_net.py`（环境变量 `EXTRA_COCO_DATASETS=...`）
   - CrowdHuman 模板：`baselines/DiffusionDet/configs/diffdet.crowdhuman.res50_d3pm_mask_dist_qhead.yaml`
   - Objects365 模板：`baselines/DiffusionDet/configs/diffdet.objects365.res50_d3pm_mask_dist_qhead.yaml`
-- MMDet+Diffusers 同栈迁移说明：`checkmd_mmdet_diffusers_stub.md`
+- MMDet+Diffusers 同栈迁移说明：`docs/checkmd_mmdet_diffusers_stub.md`
 
 ## Appendix A：常用命令模板（复制就能跑）
 

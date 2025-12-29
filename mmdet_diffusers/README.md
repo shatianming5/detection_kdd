@@ -1,11 +1,11 @@
 # mmdet_diffusers/
 
-本目录用于把 `check.md` 里“MMDetection + Diffusers Pipeline/Scheduler + 固定 N 节点图数据 collate”的工程形态，在**不破坏本仓库 Detectron2/DiffusionDet 主线**的前提下补齐为可复用模块。
+本目录用于把 `docs/check.md` 里“MMDetection + Diffusers Pipeline/Scheduler + 固定 N 节点图数据 collate”的工程形态，在**不破坏本仓库 Detectron2/DiffusionDet 主线**的前提下补齐为可复用模块。
 
 要点：
 
 - `HybridDiffusionPipeline`：基于 `diffusers.DiffusionPipeline` 的推理封装（Detectron2/DiffusionDet 适配），内部使用 `diffusers.DDIMScheduler` 管理 box diffusion；label diffusion 用自定义 D3PM(mask/uniform) 调度器。
-- `collate_coco_graph`：把检测数据打包为固定 `N` 节点的图（GT 节点 + 噪声补齐 + `unk` 类），对应 `check.md:6.1` “自定义 collate”。
+- `collate_coco_graph`：把检测数据打包为固定 `N` 节点的图（GT 节点 + 噪声补齐 + `unk` 类），对应 `docs/check.md:6.1` “自定义 collate”。
 - 适配器：`mmdet_diffusers/adapters/diffusiondet.py` 提供把本仓库的 Detectron2 `DiffusionDet` 模型包装成 Pipeline 的最小入口（推理用）。
 
 限制与说明：
@@ -13,7 +13,7 @@
 - 本仓库运行环境是 Python 3.13；`mmdet`/`mmengine` 在该版本下通常不可用，因此 **MMDet3 训练需要独立 conda 环境（Python 3.11）**。
 - 本仓库同时提供：
   - Diffusers 形态的 Pipeline/Scheduler/Collate（推理侧与口径对齐用）：`mmdet_diffusers/`
-  - **MMDet3 可直接训练的插件**（`check.md` 工程栈对齐）：`mmdet_diffusers/mmdet3/`
+  - **MMDet3 可直接训练的插件**（`docs/check.md` 工程栈对齐）：`mmdet_diffusers/mmdet3/`
     - `GraphDiffusionDetector`：固定 N proposals 的扩散检测器（含 `GraphDenoisingNetwork`、可选质量头/能量引导、可选拓扑损失）
     - `coco_graph_collate`：MMEngine `collate_fn`（固定 N 节点图）
     - `MMDet3HybridDiffusionPipeline`：Diffusers 风格 pipeline（支持 `init_state=(boxes,label_state)` 作为 tuple 输入）

@@ -310,31 +310,31 @@ ENTRIES: list[Entry] = [
         exp_id="checkmd_mvp_seed0_iter200_step1",
         tsv_path="checkmd_mvp_seed0_iter200_step1_results.tsv",
         ckpt_path_or_pattern="baselines/checkpoints/checkmd_mvp_seed0_iter200.pth",
-        notes="check.md MVP smoke: GEO_BIAS_TYPE=mlp + ANISO_NOISE + GRAPH_TOPO_LOSS + QFL + IoU-weighted reg; train_seed=0; eval_seed=0..4; SAMPLE_STEP=1",
+        notes="docs/check.md MVP smoke: GEO_BIAS_TYPE=mlp + ANISO_NOISE + GRAPH_TOPO_LOSS + QFL + IoU-weighted reg; train_seed=0; eval_seed=0..4; SAMPLE_STEP=1",
     ),
     Entry(
         exp_id="checkmd_consistency_smoke_seed0_iter50_step1",
         tsv_path="checkmd_consistency_smoke_seed0_iter50_step1_results.tsv",
         ckpt_path_or_pattern="baselines/checkpoints/checkmd_consistency_smoke_seed0_iter50.pth",
-        notes="check.md Phase3 smoke: CONSISTENCY_DISTILL entry; train_seed=0; eval_seed=0..4; SAMPLE_STEP=1",
+        notes="docs/check.md Phase3 smoke: CONSISTENCY_DISTILL entry; train_seed=0; eval_seed=0..4; SAMPLE_STEP=1",
     ),
     Entry(
         exp_id="ablation_graph_topo_full_seed0_stable_step1",
         tsv_path="ablation_graph_topo_full_seed0_stable_step1_results.tsv",
         ckpt_path_or_pattern="baselines/checkpoints/sampler_distill_20to1_seed0_iter2500_stable.pth",
-        notes="check.md:7.3-1 ablation (eval-only toggle): full graph (default self-attn); train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
+        notes="docs/check.md:7.3-1 ablation (eval-only toggle): full graph (default self-attn); train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
     ),
     Entry(
         exp_id="ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1",
         tsv_path="ablation_graph_topo_sparse_knn_topk50_seed0_stable_step1_results.tsv",
         ckpt_path_or_pattern="baselines/checkpoints/sampler_distill_20to1_seed0_iter2500_stable.pth",
-        notes="check.md:7.3-1 ablation (eval-only toggle): sparse kNN via GEO_BIAS_TOPK=50 (distance bias mask); train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
+        notes="docs/check.md:7.3-1 ablation (eval-only toggle): sparse kNN via GEO_BIAS_TOPK=50 (distance bias mask); train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
     ),
     Entry(
         exp_id="ablation_graph_topo_none_seed0_stable_step1",
         tsv_path="ablation_graph_topo_none_seed0_stable_step1_results.tsv",
         ckpt_path_or_pattern="baselines/checkpoints/sampler_distill_20to1_seed0_iter2500_stable.pth",
-        notes="check.md:7.3-1 ablation (eval-only toggle): no interaction via DISABLE_SELF_ATTN=True; train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
+        notes="docs/check.md:7.3-1 ablation (eval-only toggle): no interaction via DISABLE_SELF_ATTN=True; train_seed=0 stable student; eval_seed=0..4; SAMPLE_STEP=1",
     ),
 ]
 

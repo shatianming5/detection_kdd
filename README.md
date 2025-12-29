@@ -2,7 +2,7 @@
 
 # detection_kdd
 
-本仓库用于目标检测（Detectron2/DiffusionDet 主线）实验归档与复现，并提供对齐 `check.md` 的 **MMDet3 + Diffusers 形态**实现（`mmdet_diffusers/`，定位为对照/口径对齐，不替代主训练栈）。
+本仓库用于目标检测（Detectron2/DiffusionDet 主线）实验归档与复现，并提供对齐 `docs/check.md` 的 **MMDet3 + Diffusers 形态**实现（`mmdet_diffusers/`，定位为对照/口径对齐，不替代主训练栈）。
 
 ## 结果总览（表格）
 
@@ -39,11 +39,11 @@
 ## 目录结构（省略数据与大产物）
 
 - `baselines/`：Detectron2 baselines（DiffusionDet、DETR 等）。`baselines/data/`、`baselines/checkpoints/`、`baselines/output/`、`baselines/evals/` 为本地数据/产物目录（默认不入库）。
-- `mmdet_diffusers/`：MMDet3 插件 + Diffusers 风格 pipeline/scheduler/collate（对齐 `check.md` 的工程形态）。
+- `mmdet_diffusers/`：MMDet3 插件 + Diffusers 风格 pipeline/scheduler/collate（对齐 `docs/check.md` 的工程形态）。
+- `docs/`：文档与对齐说明（入口：`docs/README.md`；含 `docs/check.md`、`docs/checkmd_parity.md`、`docs/checkmd_mmdet_diffusers_stub.md`、`docs/plan2.md` 等）。
 - `results/`：评测 TSV、rerun manifest/summary 等轻量结果文件。
 - `scripts/`：评测多 seed、生成 manifest/summary 的脚本。
 - `deliverables/`：小体量“冻结交付”与规范示例（不包含大 ckpt）。
-- `check.md`：需求/路线文档；对齐差距与路线图见 `checkmd_parity.md`、`checkmd_mmdet_diffusers_stub.md`。
 
 ## 复现与更新口径
 
