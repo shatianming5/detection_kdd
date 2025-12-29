@@ -49,6 +49,9 @@ def init_wandb_run(
 ) -> Any:
     wandb = _require_wandb()
 
+    os.environ.setdefault("WANDB_MODE", "online")
+    os.environ.setdefault("WANDB_DIR", "wandb")
+
     project = (project or os.environ.get("WANDB_PROJECT") or "").strip()
     if not project:
         raise ValueError("WANDB_PROJECT is required (set it in env or pass --wandb-project).")
@@ -87,5 +90,4 @@ def log_artifact_files(run: Any, *, name: str, files: Iterable[Path], artifact_t
         if p.is_file():
             art.add_file(str(p))
     run.log_artifact(art)
-
 

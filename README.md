@@ -60,6 +60,7 @@
 - 配置方式（本地，不入库）：
   - `cp .env.example .env`，填入 `WANDB_API_KEY`、`WANDB_PROJECT`（以及可选 `WANDB_ENTITY`）
   - `.env` 已在 `.gitignore` 里，禁止提交
+  - 或用交互式脚本生成：`bash scripts/setup_wandb_env.sh`
 - 开关：
   - 默认：当检测到 `WANDB_PROJECT` 或 `WANDB_API_KEY` 时自动开启
   - 可显式关闭：在命令行加 `--no-wandb`
