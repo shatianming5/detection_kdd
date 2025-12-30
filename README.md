@@ -35,6 +35,8 @@
 | lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter10k_step10 | 10 | 0.00 | 0.00 | 3.74 | iter_10000.pth |
 | lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_step1 | 1 | 0.00 | 0.00 | 13.85 | iter_10000.pth |
 | lvis | lvis_iter_10000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_step10 | 10 | 0.00 | 0.00 | 1.71 | iter_10000.pth |
+| lvis | lvis_iter_150000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_fixclip1_step1 | 1 | 10.32 | 0.04 | 10.78 | iter_150000.pth |
+| lvis | lvis_iter_150000_lvis_graph_diffusion_r50_fpn_teacher_focal_iter150k_bs2_lr5e5_fixclip1_step10 | 10 | 4.66 | 0.05 | 2.18 | iter_150000.pth |
 
 ## 目录结构（省略数据与大产物）
 
