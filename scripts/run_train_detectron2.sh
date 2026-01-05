@@ -9,7 +9,18 @@ fi
 
 CONFIG_FILE="$1"
 OUTPUT_DIR="$2"
-NUM_GPUS="${3:-1}"
+if [[ $# -ge 3 ]]; then
+  NUM_GPUS="$3"
+else
+  NUM_GPUS="$(python - <<'PY'
+import torch
+print(torch.cuda.device_count())
+PY
+)"
+  if [[ -z "${NUM_GPUS}" || "${NUM_GPUS}" -lt 1 ]]; then
+    NUM_GPUS=1
+  fi
+fi
 
 shift 2
 if [[ $# -ge 1 ]]; then
@@ -19,4 +30,3 @@ fi
 python baselines/DiffusionDet/train_net.py --config-file "${CONFIG_FILE}" --num-gpus "${NUM_GPUS}" \
   OUTPUT_DIR "${OUTPUT_DIR}" \
   "$@"
-
